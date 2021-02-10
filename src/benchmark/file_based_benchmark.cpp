@@ -78,6 +78,7 @@ int main(int argc, char* argv[]) {
 
   auto benchmark_runner = std::make_shared<BenchmarkRunner>(*benchmark_config, std::move(benchmark_item_runner),
                                                             std::move(table_generator), context);
+	std::cout << "PMEM used: " << NVMMemoryResource::get().memory_usage() << std::endl;
 	std::cout << "Moving tables to pmem..." << std::endl;														
   Hyrise::get().benchmark_runner = benchmark_runner;
   const auto& sm = Hyrise::get().storage_manager;
@@ -96,5 +97,6 @@ int main(int argc, char* argv[]) {
 	}
 	}
 	std::cout << "Tables are in PMEM now. Starting benchmark..." << std::endl;
+	std::cout << "PMEM used: " << NVMMemoryResource::get().memory_usage() << std::endl;
   benchmark_runner->run();
 }

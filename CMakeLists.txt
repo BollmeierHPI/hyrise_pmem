@@ -115,9 +115,15 @@ find_package(Curses REQUIRED)
 find_package(Sqlite3 REQUIRED)
 find_package(Boost REQUIRED COMPONENTS container system date_time)
 
-option(HYRISE_WITH_MEMKIND "Set to OFF to build Hyrise without memkind support" ON)
+option(HYRISE_WITH_MEMKIND "Set to OFF to build Hyrise without memkind support" OFF)
 if (${HYRISE_WITH_MEMKIND})
     find_package(Memkind REQUIRED)
+endif()
+
+option(HYRISE_WITH_SEQPMEM "Set to OFF to build Hyrise without memkind support" ON)
+if (${HYRISE_WITH_SEQPMEM})
+    find_package(Libpmem2 REQUIRED)
+	find_package(Libpmem REQUIRED)
 endif()
 
 add_definitions(-DBOOST_THREAD_VERSION=5)

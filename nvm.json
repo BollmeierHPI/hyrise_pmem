@@ -1,3 +1,4 @@
 {
-  "pooldir": "/mnt/nvrams1/lars.bollmeier/hyrise-tmp/"
+  "pooldir": "/mnt/nvrams1/lars.bollmeier/hyrise-tmp/",
+  "poolfile": "/dev/dax1.1"
 }

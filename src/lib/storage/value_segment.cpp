@@ -12,11 +12,14 @@
 #include "utils/assert.hpp"
 #include "utils/performance_warning.hpp"
 #include "utils/size_estimation_utils.hpp"
+#include "memory/nvm_memory_resource.hpp"
 
 namespace opossum {
 
 template <typename T>
 ValueSegment<T>::ValueSegment(bool nullable, ChunkOffset capacity) : BaseValueSegment(data_type_from_type<T>()) {
+  //auto alloc = PolymorphicAllocator<T>(&NVMMemoryResource::get());
+  _values = pmr_vector<T>(0,&NVMMemoryResource::get());
   _values.reserve(capacity);
   if (nullable) {
     _null_values = pmr_vector<bool>();
